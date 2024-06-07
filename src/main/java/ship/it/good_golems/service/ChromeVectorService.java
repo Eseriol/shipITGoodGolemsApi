@@ -1,3 +1,4 @@
+
 package ship.it.good_golems.service;
 
 
@@ -36,3 +37,4 @@ public class ChromeVectorService {
         return results;
     }
 }
+

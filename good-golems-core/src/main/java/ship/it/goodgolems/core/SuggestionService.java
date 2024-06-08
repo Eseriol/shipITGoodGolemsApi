@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ship.it.goodgolems.api.AiSuggestionApi;
 import ship.it.goodgolems.domain.Employee;
@@ -19,13 +19,36 @@ import ship.it.goodgolems.spi.storage.ProjectStorage;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class SuggestionService implements AiSuggestionApi {
 
     private EmployeeStorage employeeStorage;
     private ProjectStorage projectStorage;
     private final EmployeeSuggester employeeSuggester;
     private final ProjectSuggester projectSuggester;
+
+    @Autowired
+    public SuggestionService(EmployeeSuggester employeeSuggester, ProjectSuggester projectSuggester) {
+        this(null, null, employeeSuggester, projectSuggester);
+    }
+    public SuggestionService(EmployeeStorage employeeStorage, ProjectStorage projectStorage,
+            EmployeeSuggester employeeSuggester, ProjectSuggester projectSuggester) {
+        this.employeeStorage = employeeStorage;
+        this.projectStorage = projectStorage;
+        this.employeeSuggester = employeeSuggester;
+        this.projectSuggester = projectSuggester;
+    }
+
+    @Autowired
+    public SuggestionService setEmployeeStorage(EmployeeStorage employeeStorage) {
+        this.employeeStorage = employeeStorage;
+        return this;
+    }
+
+    @Autowired
+    public SuggestionService setProjectStorage(ProjectStorage projectStorage) {
+        this.projectStorage = projectStorage;
+        return this;
+    }
 
     @Override
     public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects) {

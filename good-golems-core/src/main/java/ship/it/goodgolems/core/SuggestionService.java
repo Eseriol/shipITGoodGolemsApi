@@ -4,8 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -51,28 +49,28 @@ public class SuggestionService implements AiSuggestionApi {
                 });
     }
 
-    @Component
-    @ConditionalOnMissingBean(EmployeeStorage.class)
-    class MockEmployeeStorage implements EmployeeStorage {
-
-        @Override
-        public Set<Employee> getEmployees() {
-            return Set.of();
-        }
-
-        @Override
-        public Set<Employee> getAvailableEmployees() {
-            return Set.of();
-        }
-    }
-
-    @Component
-    @ConditionalOnMissingBean(ProjectStorage.class)
-    class MockProjectStorage implements ProjectStorage {
-
-        @Override
-        public Set<Project> getProjects() {
-            return Set.of();
-        }
-    }
+//    @Component
+//    @ConditionalOnMissingBean(EmployeeStorage.class)
+//    class MockEmployeeStorage implements EmployeeStorage {
+//
+//        @Override
+//        public Set<Employee> getEmployees() {
+//            return Set.of();
+//        }
+//
+//        @Override
+//        public Set<Employee> getAvailableEmployees() {
+//            return Set.of();
+//        }
+//    }
+//
+//    @Component
+//    @ConditionalOnMissingBean(ProjectStorage.class)
+//    class MockProjectStorage implements ProjectStorage {
+//
+//        @Override
+//        public Set<Project> getProjects() {
+//            return Set.of();
+//        }
+//    }
 }

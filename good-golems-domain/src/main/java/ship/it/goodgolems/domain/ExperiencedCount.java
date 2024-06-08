@@ -5,7 +5,7 @@ public record ExperiencedCount(
         int countOfEmployee
 ) {
 
-    public ExperiencedCount{
+    public ExperiencedCount {
         yearsOfExperience = yearsOfExperience < 0 ? 0 : yearsOfExperience;
         countOfEmployee = countOfEmployee < 0 ? 0 : countOfEmployee;
     }

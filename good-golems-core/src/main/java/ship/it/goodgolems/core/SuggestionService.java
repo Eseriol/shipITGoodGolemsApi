@@ -38,13 +38,13 @@ public class SuggestionService implements AiSuggestionApi {
         this.projectSuggester = projectSuggester;
     }
 
-    @Autowired
+//    @Autowired
     public SuggestionService setEmployeeStorage(EmployeeStorage employeeStorage) {
         this.employeeStorage = employeeStorage;
         return this;
     }
 
-    @Autowired
+//    @Autowired
     public SuggestionService setProjectStorage(ProjectStorage projectStorage) {
         this.projectStorage = projectStorage;
         return this;

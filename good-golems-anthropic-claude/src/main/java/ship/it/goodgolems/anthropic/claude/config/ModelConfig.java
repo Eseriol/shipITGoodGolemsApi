@@ -31,7 +31,7 @@ public class ModelConfig {
                 credentialsProvider,
                 awsRegion.id(),
                 new ObjectMapper(),
-                Duration.ofMillis(1000L)
+                Duration.ofMillis(3*60*1000L)
         );
     }
 

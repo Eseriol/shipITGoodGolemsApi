@@ -8,10 +8,11 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import ship.it.goodgolems.spi.ai.model.AiClient;
 
 @Component
 @RequiredArgsConstructor
-public class AiFacade {
+public class AiFacade implements AiClient {
 
     private final ChatClient aiClient;
 

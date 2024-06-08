@@ -12,4 +12,10 @@ public interface AiClient {
 
     <T> List<T> getResponse(String prompt, ParameterizedTypeReference<List<T>> responseType);
 
+    String adviseResponseAsString(String prompt);
+
+    <T> T adviseResponse(String prompt, Class<T> responseType);
+
+    <T> List<T> adviseResponse(String prompt, ParameterizedTypeReference<List<T>> responseType);
+
 }

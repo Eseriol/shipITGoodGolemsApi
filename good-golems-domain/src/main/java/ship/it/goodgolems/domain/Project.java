@@ -6,6 +6,9 @@ import java.util.Set;
 
 import org.springframework.util.Assert;
 
+import lombok.Builder;
+
+@Builder
 public record Project(
         String name,
         Set<Employee> employees,

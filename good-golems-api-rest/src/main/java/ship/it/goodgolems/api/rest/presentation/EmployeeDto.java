@@ -38,10 +38,4 @@ public record EmployeeDto(
         return Objects.isNull(currentProject);
     }
 
-    public boolean experiencedIn(StackDto stack, int minYears) {
-        return experience.stream()
-                .filter(exp -> exp.stack()
-                        .equals(stack))
-                .anyMatch(exp -> exp.years() >= minYears);
-    }
 }

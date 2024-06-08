@@ -12,10 +12,10 @@ public interface EmployeeSuggester {
 
     Optional<Set<Employee>> sagestEmployeesForProject(final Project project);
 
-    Optional<Map<Project, Employee>> sagestEmployeesForProjects(final Collection<Project> projects);
+    Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(final Collection<Project> projects);
 
     Optional<Set<Employee>> sagestEmployeesForProject(final Project project, final Collection<Employee> employees);
 
-    Optional<Map<Project, Employee>> sagestEmployeesForProjects(final Collection<Project> projects, final Collection<Employee> employees);
+    Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(final Collection<Project> projects, final Collection<Employee> employees);
 
 }

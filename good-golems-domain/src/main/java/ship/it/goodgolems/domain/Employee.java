@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.util.Assert;
+
 public record Employee(
         String fullName,
         String position,
@@ -12,6 +14,7 @@ public record Employee(
 ) {
 
     public Employee {
+        Assert.hasText(fullName, "Name of employee must not be empty");
         fullName = Optional.ofNullable(fullName).orElse("");
         position = Optional.ofNullable(position)
                 .orElse("");

@@ -1,5 +1,6 @@
 package ship.it.goodgolems.domain;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,5 +16,16 @@ public record Employee(
         position = Optional.ofNullable(position)
                 .orElse("");
         experience = Optional.ofNullable(experience).orElse(Set.of());
+    }
+
+    public boolean isAvailable() {
+        return Objects.isNull(currentProject);
+    }
+
+    public boolean experiencedIn(Stack stack, int minYears) {
+        return experience.stream()
+                .filter(exp -> exp.stack()
+                        .equals(stack))
+                .anyMatch(exp -> exp.years() >= minYears);
     }
 }

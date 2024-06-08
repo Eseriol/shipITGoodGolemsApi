@@ -2,6 +2,7 @@ package ship.it.goodgolems.core;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -21,14 +22,17 @@ import ship.it.goodgolems.spi.storage.ProjectStorage;
 @RequiredArgsConstructor
 public class SuggestionService implements AiSuggestionApi {
 
-    private final EmployeeStorage employeeStorage;
-    private final ProjectStorage projectStorage;
+    private EmployeeStorage employeeStorage;
+    private ProjectStorage projectStorage;
     private final EmployeeSuggester employeeSuggester;
     private final ProjectSuggester projectSuggester;
 
     @Override
     public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects) {
-        Set<Employee> employees = employeeStorage.getAvailableEmployees();
+
+        Set<Employee> employees = Optional.ofNullable(employeeStorage)
+                .orElseGet(MockEmployeeStorage::new)
+                .getAvailableEmployees();
         if (employees.isEmpty()) {
             log.warn("No available employees found");
             return Map.of();
@@ -42,35 +46,31 @@ public class SuggestionService implements AiSuggestionApi {
 
     @Override
     public Set<Project> suggestProjects(Employee employee) {
-        return projectSuggester.findProjectsForEmployee(employee, projectStorage.getProjects())
+        return projectSuggester.findProjectsForEmployee(employee, Optional.ofNullable(projectStorage)
+                        .orElseGet(MockProjectStorage::new).getProjects())
                 .orElseGet(() -> {
                     log.warn("No suggested projects found");
                     return Set.of();
                 });
     }
 
-//    @Component
-//    @ConditionalOnMissingBean(EmployeeStorage.class)
-//    class MockEmployeeStorage implements EmployeeStorage {
-//
-//        @Override
-//        public Set<Employee> getEmployees() {
-//            return Set.of();
-//        }
-//
-//        @Override
-//        public Set<Employee> getAvailableEmployees() {
-//            return Set.of();
-//        }
-//    }
-//
-//    @Component
-//    @ConditionalOnMissingBean(ProjectStorage.class)
-//    class MockProjectStorage implements ProjectStorage {
-//
-//        @Override
-//        public Set<Project> getProjects() {
-//            return Set.of();
-//        }
-//    }
+    class MockEmployeeStorage implements EmployeeStorage {
+        @Override
+        public Set<Employee> getEmployees() {
+            return Set.of();
+        }
+
+        @Override
+        public Set<Employee> getAvailableEmployees() {
+            return Set.of();
+        }
+    }
+
+
+    class MockProjectStorage implements ProjectStorage {
+        @Override
+        public Set<Project> getProjects() {
+            return Set.of();
+        }
+    }
 }

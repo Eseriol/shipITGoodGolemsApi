@@ -9,33 +9,13 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>good-golems-core</artifactId>
-    <description>Business logic of domain</description>
+    <artifactId>good-golems-spi-storage</artifactId>
+    <description>Interfaces of storage database</description>
 
     <dependencies>
         <dependency>
             <groupId>ship.it</groupId>
             <artifactId>good-golems-domain</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-vectordb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-ai-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-ai-embedded-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-storage</artifactId>
         </dependency>
     </dependencies>
 

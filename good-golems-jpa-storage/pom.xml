@@ -9,39 +9,32 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>good-golems-core</artifactId>
-    <description>Business logic of domain</description>
+    <artifactId>good-golems-jpa-storage</artifactId>
+    <description>Implementation of relational database storage</description>
 
     <dependencies>
-        <dependency>
-            <groupId>net.datafaker</groupId>
-            <artifactId>datafaker</artifactId>
-            <version>2.2.2</version>
-        </dependency>
         <dependency>
             <groupId>ship.it</groupId>
             <artifactId>good-golems-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>ship.it</groupId>
-            <artifactId>good-golems-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-vectordb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-ai-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-spi-ai-embedded-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ship.it</groupId>
             <artifactId>good-golems-spi-storage</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.modulith</groupId>
+            <artifactId>spring-modulith-starter-jpa</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

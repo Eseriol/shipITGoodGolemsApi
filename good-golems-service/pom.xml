@@ -43,6 +43,14 @@
         </dependency>
         <dependency>
             <groupId>ship.it</groupId>
+            <artifactId>good-golems-spi-storage</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-jpa-storage</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
             <artifactId>good-golems-anthropic-claude</artifactId>
         </dependency>
         <dependency>

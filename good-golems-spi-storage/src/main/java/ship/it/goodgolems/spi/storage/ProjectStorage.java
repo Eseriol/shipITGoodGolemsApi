@@ -6,6 +6,10 @@ import ship.it.goodgolems.domain.Project;
 
 public interface ProjectStorage {
 
+    /**
+     * Get all projects from DB
+     * @return
+     */
     Set<Project> getProjects();
 
 }

@@ -1,13 +1,18 @@
-package ship.it.goodgolems.domain.model;
+package ship.it.goodgolems.jpa.model;
 
-import jakarta.persistence.*;
+import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ship.it.goodgolems.domain.ProjectRequirement;
-
-import java.util.Set;
 
 @Entity
 @Getter

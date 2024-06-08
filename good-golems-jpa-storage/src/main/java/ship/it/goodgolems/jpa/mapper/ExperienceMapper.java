@@ -1,9 +1,10 @@
-package ship.it.goodgolems.domain.mapper;
+package ship.it.goodgolems.jpa.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
 import ship.it.goodgolems.domain.Experience;
-import ship.it.goodgolems.domain.model.ExperienceEntity;
+import ship.it.goodgolems.jpa.model.ExperienceEntity;
 
 @Mapper
 public interface ExperienceMapper {

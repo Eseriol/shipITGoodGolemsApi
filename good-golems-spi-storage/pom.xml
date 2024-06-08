@@ -17,6 +17,8 @@
             <groupId>ship.it</groupId>
             <artifactId>good-golems-domain</artifactId>
         </dependency>
+
+
     </dependencies>
 
     <build>

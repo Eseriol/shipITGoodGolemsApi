@@ -1,9 +1,10 @@
-package ship.it.goodgolems.domain.mapper;
+package ship.it.goodgolems.jpa.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+
 import ship.it.goodgolems.domain.ProjectRequirement;
-import ship.it.goodgolems.domain.model.ProjectRequirementEntity;
+import ship.it.goodgolems.jpa.model.ProjectRequirementEntity;
 
 @Mapper
 public interface ProjectRequirementMapper {

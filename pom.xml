@@ -11,26 +11,37 @@
 	<groupId>ship.it</groupId>
 	<artifactId>good-golems</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>good-golems</name>
 	<description>Hackhaton shipit 2024 genAi</description>
+	<modules>
+		<module>good-golems-core</module>
+		<module>good-golems-api</module>
+		<module>good-golems-api-rest</module>
+		<module>good-golems-service</module>
+		<module>good-golems-spi-vectordb</module>
+		<module>good-golems-spi-ai-model</module>
+		<module>good-golems-spi-ai-embedded-model</module>
+		<module>good-golems-chroma</module>
+		<module>good-golems-cohere</module>
+		<module>good-golems-anthropic-claude</module>
+		<module>good-golems-domain</module>
+	</modules>
 	<properties>
+		<revision.version>${project.version}</revision.version>
+
 		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
 		<spring-ai.version>1.0.0-M1</spring-ai.version>
 		<spring-modulith.version>1.2.0</spring-modulith.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-bedrock-ai-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.ai</groupId>
-			<artifactId>spring-ai-chroma-store-spring-boot-starter</artifactId>
-		</dependency>
+
+
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -41,10 +52,7 @@
 			<groupId>org.springframework.modulith</groupId>
 			<artifactId>spring-modulith-starter-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -71,6 +79,57 @@
 				<version>${spring-modulith.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-domain</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-core</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-api</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-api-rest</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-spi-ai-model</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-anthropic-claude</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-spi-vectordb</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-chroma</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-spi-ai-embedded-model</artifactId>
+				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-cohere</artifactId>
+				<version>${revision.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

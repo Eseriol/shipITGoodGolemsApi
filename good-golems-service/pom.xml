@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ship.it</groupId>
+        <artifactId>good-golems</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>good-golems-service</artifactId>
+    <description>Application as a service and configurations of beans</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-api-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-spi-ai-embedded-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-spi-ai-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-spi-vectordb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-anthropic-claude</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-chroma</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-cohere</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

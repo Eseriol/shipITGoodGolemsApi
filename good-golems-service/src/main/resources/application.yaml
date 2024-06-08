@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: good-golems
+  ai:
+    vectorstore:
+      chroma:
+        store:
+          initialize-schema: false
+          collection-name: SpringAiCollection
+        client:
+          host: http://18.157.175.249
+          port: 8000
+    bedrock:
+      aws:
+        region: eu-central-1
+        access-key: ${AWS_ACCESS_KEY_ID}
+        secret-key: ${AWS_SECRET_ACCESS_KEY}
+      cohere:
+        embedding:
+          enabled: true
+      anthropic3:
+        chat:
+          enabled: true
+          model: anthropic.claude-3-sonnet-20240229-v1:0

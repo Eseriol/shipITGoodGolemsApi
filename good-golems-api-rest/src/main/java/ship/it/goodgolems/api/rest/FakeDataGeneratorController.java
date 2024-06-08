@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ship.it.goodgolems.api.FakeDataGeneratorApi;
 import ship.it.goodgolems.api.rest.presentation.Converter;
 import ship.it.goodgolems.api.rest.presentation.EmployeeDto;
-import ship.it.goodgolems.domain.Employee;
-import ship.it.goodgolems.domain.Project;
+import ship.it.goodgolems.api.rest.presentation.ProjectDto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,18 +22,19 @@ public class FakeDataGeneratorController {
     private final FakeDataGeneratorApi fakeDataGeneratorApi;
 
     @PostMapping("/faker/Employees")
-    public ResponseEntity<List<EmployeeDto>> fakeEmployeesDataGen(@RequestParam int noGen) {
-        List<EmployeeDto> employeeDtos = new ArrayList<>();
-        for (Employee employee : fakeDataGeneratorApi.generateEmployees(noGen)) {
-            employeeDtos.add(Converter.convert(employee));
-        }
+    public ResponseEntity<List<EmployeeDto>> fakeEmployeesDataGen(@RequestParam int generationTarget) {
 
+        List<EmployeeDto> employeeDtos = fakeDataGeneratorApi.generateEmployees(generationTarget).stream()
+                .map(Converter::convert)
+                .toList();
         return ResponseEntity.ok(employeeDtos);
     }
 
     @PostMapping("/faker/Project")
-    public ResponseEntity<List<Project>> fakeProjectDataGen(@RequestParam int noGen) {
-        List<Project> projects = fakeDataGeneratorApi.generateProjects(noGen);
-        return ResponseEntity.ok(projects);
+    public ResponseEntity<List<ProjectDto>> fakeProjectDataGen(@RequestParam int generationTarget) {
+        List<ProjectDto> projectDtos = fakeDataGeneratorApi.generateProjects(generationTarget).stream()
+                .map(Converter::convert)
+                .toList();
+        return ResponseEntity.ok(projectDtos);
     }
 }

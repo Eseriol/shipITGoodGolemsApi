@@ -9,7 +9,7 @@ public record ProjectRequirement(
         Set<ExperiencedCount> experiencedCount
 ) {
 
-    public ProjectRequirement{
+    public ProjectRequirement {
         stack = Optional.ofNullable(stack).orElse(new Stack(""));
         experiencedCount = Optional.ofNullable(experiencedCount)
                 .orElse(Set.of())

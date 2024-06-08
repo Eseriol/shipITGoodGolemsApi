@@ -1,6 +1,9 @@
 package ship.it.goodgolems.jpa.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import ship.it.goodgolems.domain.Project;
 
-public interface ProjectRepository extends CrudRepository<ProjectRepository, Long> {
+@Repository
+public interface ProjectRepository extends CrudRepository<Project, Long> {
 }

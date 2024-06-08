@@ -3,13 +3,8 @@ spring:
     name: good-golems
   ai:
     vectorstore:
-      chroma:
-        store:
-          initialize-schema: false
-          collection-name: SpringAiCollection
-        client:
-          host: http://18.157.175.249
-          port: 8000
+      redis:
+        uri: redis://3.121.160.69:6379
     bedrock:
       aws:
         region: eu-central-1

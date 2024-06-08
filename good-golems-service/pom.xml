@@ -55,7 +55,7 @@
         </dependency>
         <dependency>
             <groupId>ship.it</groupId>
-            <artifactId>good-golems-chroma</artifactId>
+            <artifactId>good-golems-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>ship.it</groupId>

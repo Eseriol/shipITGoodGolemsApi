@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>good-golems-chroma</artifactId>
+    <artifactId>good-golems-redis</artifactId>
     <description>SPI implementation of vector DB</description>
 
     <dependencies>
@@ -25,10 +25,9 @@
             <groupId>ship.it</groupId>
             <artifactId>good-golems-spi-ai-embedded-model</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-chroma-store-spring-boot-starter</artifactId>
+            <artifactId>spring-ai-redis-store-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>

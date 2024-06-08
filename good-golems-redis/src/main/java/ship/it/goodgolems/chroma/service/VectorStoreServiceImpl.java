@@ -15,7 +15,7 @@ import ship.it.goodgolems.spi.vectordb.VectorStoregeService;
 
 @Service
 @RequiredArgsConstructor
-public class ChromeVectorService implements VectorStoregeService {
+public class VectorStoreServiceImpl implements VectorStoregeService {
 
     private final VectorStore vectorStore;
 

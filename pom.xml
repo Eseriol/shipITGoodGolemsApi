@@ -22,7 +22,7 @@
 		<module>good-golems-spi-vectordb</module>
 		<module>good-golems-spi-ai-model</module>
 		<module>good-golems-spi-ai-embedded-model</module>
-		<module>good-golems-chroma</module>
+		<module>good-golems-redis</module>
 		<module>good-golems-cohere</module>
 		<module>good-golems-anthropic-claude</module>
 		<module>good-golems-domain</module>
@@ -53,11 +53,7 @@
             <groupId>org.springframework.modulith</groupId>
             <artifactId>spring-modulith-starter-core</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${springdoc.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -133,7 +129,7 @@
 			</dependency>
 			<dependency>
 				<groupId>ship.it</groupId>
-				<artifactId>good-golems-chroma</artifactId>
+				<artifactId>good-golems-redis</artifactId>
 				<version>${revision.version}</version>
 			</dependency>
 			<dependency>
@@ -155,6 +151,11 @@
 				<groupId>ship.it</groupId>
 				<artifactId>good-golems-jpa-storage</artifactId>
 				<version>${revision.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+				<version>${springdoc.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

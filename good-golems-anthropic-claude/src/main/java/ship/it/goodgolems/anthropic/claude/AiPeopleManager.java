@@ -19,7 +19,7 @@ public class AiPeopleManager implements EmployeeSuggester {
     }
 
     @Override
-    public Optional<Map<Project, Employee>> sagestEmployeesForProjects(Collection<Project> projects) {
+    public Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(Collection<Project> projects) {
         return Optional.empty();
     }
 
@@ -29,7 +29,7 @@ public class AiPeopleManager implements EmployeeSuggester {
     }
 
     @Override
-    public Optional<Map<Project, Employee>> sagestEmployeesForProjects(Collection<Project> projects,
+    public Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(Collection<Project> projects,
             Collection<Employee> employees) {
         return Optional.empty();
     }

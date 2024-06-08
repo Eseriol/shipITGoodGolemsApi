@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import ship.it.goodgolems.api.AiSuggestionApi;
 import ship.it.goodgolems.domain.Employee;
 import ship.it.goodgolems.domain.Project;
@@ -17,6 +18,7 @@ import ship.it.goodgolems.spi.ai.model.ProjectSuggester;
 import ship.it.goodgolems.spi.storage.EmployeeStorage;
 import ship.it.goodgolems.spi.storage.ProjectStorage;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class SuggestionService implements AiSuggestionApi {
@@ -28,12 +30,25 @@ public class SuggestionService implements AiSuggestionApi {
 
     @Override
     public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects) {
-        return Map.of();
+        Set<Employee> employees = employeeStorage.getAvailableEmployees();
+        if (employees.isEmpty()) {
+            log.warn("No available employees found");
+            return Map.of();
+        }
+        return employeeSuggester.sagestEmployeesForProjects(projects, employees).orElseGet(
+                () -> {
+                    log.warn("No suggested employees found");
+                    return Map.of();
+                });
     }
 
     @Override
     public Set<Project> suggestProjects(Employee employee) {
-        return Set.of();
+        return projectSuggester.findProjectsForEmployee(employee, projectStorage.getProjects())
+                .orElseGet(() -> {
+                    log.warn("No suggested projects found");
+                    return Set.of();
+                });
     }
 
     @Component

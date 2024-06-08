@@ -24,3 +24,6 @@ spring:
         chat:
           enabled: true
           model: anthropic.claude-3-sonnet-20240229-v1:0
+springdoc:
+  api-docs:
+    path: /api-docs

@@ -26,8 +26,11 @@ public class FakeDataGeneratorService implements FakeDataGeneratorApi {
         for (int i = 0; i < noGen; i++) {
             Set<Experience> exps = new HashSet<>();
             for (int j = 0; j < 4; j++) {
+                String programmingLanguage = faker.programmingLanguage().name();
+                Stack stack = new Stack(programmingLanguage);
+
                 Experience exp = new Experience(
-                        new Stack(faker.programmingLanguage().name()),
+                        stack,
                         faker.number().numberBetween(1, 15)
                 );
                 exps.add(exp);

@@ -9,6 +9,6 @@ public record StackDto(
         String technologyName
 ) {
     public StackDto {
-        Assert.hasText(technologyName, "Name of technology must not be empty");
+//        Assert.hasText(technologyName, "Name of technology must not be empty");
     }
 }

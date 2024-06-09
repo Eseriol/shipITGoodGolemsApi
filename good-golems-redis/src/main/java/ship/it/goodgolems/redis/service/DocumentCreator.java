@@ -9,9 +9,19 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import ship.it.goodgolems.domain.Employee;
 
+/**
+ * The DocumentCreator class is responsible for creating Document objects based on an Employee object.
+ * It provides a static method to create a Document with the employee's information and metadata.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 class DocumentCreator {
 
+    /**
+     * Creates a Document object based on an Employee object.
+     *
+     * @param employee The Employee object for creating the Document.
+     * @return The created Document object.
+     */
     static Document createDocument(Employee employee) {
         return new Document(employee.toString(), generateEmployeeMetadata(employee));
     }

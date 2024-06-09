@@ -5,6 +5,9 @@ import java.util.Set;
 
 import ship.it.goodgolems.domain.Project;
 
+/**
+ * The ProjectStorage interface provides methods for retrieving projects from a database.
+ */
 public interface ProjectStorage {
 
     /**

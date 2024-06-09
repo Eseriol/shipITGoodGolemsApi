@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 
+/**
+ * This class provides AWS configuration beans for the application.
+ */
 @Configuration
 public class AwsConfig {
 

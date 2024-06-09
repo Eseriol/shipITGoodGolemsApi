@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.core.ParameterizedTypeReference;
 
+/**
+ * AiClient is the interface for an AI chat client that provides methods for retrieving responses based on user prompts.
+ */
 public interface AiClient {
 
     String getResponseAsString(String prompt);

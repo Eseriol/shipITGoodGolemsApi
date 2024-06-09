@@ -17,12 +17,23 @@ import ship.it.goodgolems.domain.Employee;
 import ship.it.goodgolems.domain.ai.VectorStoreDocument;
 import ship.it.goodgolems.spi.vectordb.VectorStoregeService;
 
+/**
+ * RedisStorage is a class that implements the VectorStoregeService interface.
+ * It provides methods to store, delete, and search for documents in a vector store using Redis.
+ */
 @Service
 @RequiredArgsConstructor
 public class RedisStorage implements VectorStoregeService {
 
     private final VectorStore vectorStore;
 
+    /**
+     * Stores the list of employees in a vector store and returns a list of VectorStoreDocuments
+     * representing the stored documents.
+     *
+     * @param employees The list of employees to be stored.
+     * @return A list of VectorStoreDocuments representing the stored documents.
+     */
     @Override
     public List<VectorStoreDocument> store(Collection<Employee> employees) {
         var documents = employees.stream().map(DocumentCreator::createDocument).toList();
@@ -32,11 +43,23 @@ public class RedisStorage implements VectorStoregeService {
                 .toList();
     }
 
+    /**
+     * Deletes the documents with the given IDs from the vector store.
+     *
+     * @param documentIds The list of document IDs to be deleted.
+     * @return An Optional<Boolean> object indicating whether the delete operation was successful.
+     */
     @Override
     public Optional<Boolean> delete(List<String> documentIds) {
         return vectorStore.delete(documentIds);
     }
 
+    /**
+     * Retrieves a list of documents similar to the given query from the vector store.
+     *
+     * @param query The query to search for similarities.
+     * @return A list of strings representing the content of the similar documents.
+     */
     @Override
     public List<String> simpleVector(String query) {
         List<Document> documents = List.of(

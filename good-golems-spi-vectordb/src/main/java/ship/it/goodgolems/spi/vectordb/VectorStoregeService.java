@@ -7,6 +7,10 @@ import java.util.Optional;
 import ship.it.goodgolems.domain.Employee;
 import ship.it.goodgolems.domain.ai.VectorStoreDocument;
 
+/**
+ * The VectorStoregeService interface provides methods for manipulating a vector store,
+ * storing documents, deleting documents, and searching for similar documents.
+ */
 public interface VectorStoregeService {
 
     List<String> simpleVector(String query);

@@ -4,6 +4,9 @@ import java.util.Set;
 
 import ship.it.goodgolems.domain.Employee;
 
+/**
+ * The EmployeeStorage interface provides methods to retrieve information about employees.
+ */
 public interface EmployeeStorage {
 
     /**

@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(name = "Experience")
 @Getter
 @Setter
 @EqualsAndHashCode

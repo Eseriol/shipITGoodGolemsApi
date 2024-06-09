@@ -1,5 +1,6 @@
 package ship.it.goodgolems.core;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import ship.it.goodgolems.api.FakeDataGeneratorApi;
 import ship.it.goodgolems.core.providers.CustomFaker;
@@ -22,6 +23,8 @@ public class FakeDataGeneratorService implements FakeDataGeneratorApi {
     private static final int MAX_PROJECT_REQUIRED_EXPERIENCE_PER_STACK = 5;
     private static final int MAX_PROJECT_REQUIRED_EMPLOYEE_PER_STACK = 5;
     private static final int MAX_PROJECT_REQUIRED_STACK_PER_SENIORITY = 5;
+
+
 
     @Override
     public List<Employee> generateEmployees(int generationRequested) {

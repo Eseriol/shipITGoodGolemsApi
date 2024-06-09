@@ -3,18 +3,13 @@ package ship.it.goodgolems.jpa.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(name = "ProjectRequirement")
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -25,9 +20,9 @@ public class ProjectRequirementEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade =  CascadeType.ALL)
     StackEntity stack;
 
-    @OneToMany
+    @OneToMany(cascade =  CascadeType.ALL)
     Set<ExperiencedCountEntity> experiencedCount;
 }

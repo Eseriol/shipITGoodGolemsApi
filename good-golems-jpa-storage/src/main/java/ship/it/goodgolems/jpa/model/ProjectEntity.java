@@ -3,18 +3,13 @@ package ship.it.goodgolems.jpa.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(name = "Project")
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -31,6 +26,6 @@ public class ProjectEntity implements Serializable {
     @OneToMany
     Set<EmployeeEntity> employees;
 
-    @OneToMany
+    @OneToMany(cascade =  CascadeType.ALL)
     Set<ProjectRequirementEntity> requirements;
 }

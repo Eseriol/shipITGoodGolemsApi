@@ -9,20 +9,8 @@ import ship.it.goodgolems.domain.Project;
 
 public interface AiSuggestionApi {
 
-    /**
-     * Returns a map of suggested employees for each project.
-     *
-     * @param projects A collection of projects for which employees need to be suggested.
-     * @return A map where each project is mapped to a set of suggested employees.
-     */
-    Map<Project, Set<Employee>> suggestEmployees(final Collection<Project> projects);
+    Map<Project, Set<Employee>> suggestEmployees(final Collection<Project> projects, boolean usingRAG);
 
-    /**
-     * Suggests projects for a given employee.
-     *
-     * @param employee The employee for whom projects need to be suggested.
-     * @return A set of projects that are suggested for the given employee.
-     */
-    Set<Project> suggestProjects(final Employee employee);
+    Set<Project> suggestProjects(final Employee employee, boolean usingRAG);
 
 }

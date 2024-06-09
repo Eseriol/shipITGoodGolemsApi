@@ -28,7 +28,7 @@ public class RedisStorage implements VectorStoregeService {
         var documents = employees.stream().map(DocumentCreator::createDocument).toList();
         vectorStore.add(documents);
         return documents.stream()
-                .map(e -> new VectorStoreDocument(e.getId()))
+                .map(e -> new VectorStoreDocument(e.getId(), (String) e.getMetadata().get("fullName")))
                 .toList();
     }
 

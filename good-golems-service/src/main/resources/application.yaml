@@ -2,6 +2,7 @@ spring:
   application:
     name: good-golems
   ai:
+    rag: true # use RAG
     vectorstore:
       redis:
         uri: redis://3.121.160.69:6379

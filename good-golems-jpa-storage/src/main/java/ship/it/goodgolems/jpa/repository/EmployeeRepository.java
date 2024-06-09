@@ -15,12 +15,10 @@ import ship.it.goodgolems.jpa.model.EmployeeEntity;
 public interface EmployeeRepository extends ListCrudRepository<EmployeeEntity, Long> {
 
     default Set<Employee> findAvailableEmployees() {
-        return findEmployeesByCurrentProjectEmpty(
-                Employee.class
-        );
+        return findEmployeesByCurrentProject_Id(null, Employee.class);
     }
 
-    <T> Set<T> findEmployeesByCurrentProjectEmpty(Class<T> type);
+    <T> Set<T> findEmployeesByCurrentProject_Id(Long id, Class<T> type);
 
     List<EmployeeEntity> findAllByPosition(String position);
 

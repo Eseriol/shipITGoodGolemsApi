@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import ship.it.goodgolems.api.AiSuggestionApi;
 import ship.it.goodgolems.domain.Employee;
 import ship.it.goodgolems.domain.Project;
+import ship.it.goodgolems.domain.ai.TeamSuggestion;
 import ship.it.goodgolems.domain.ai.VectorStoreDocument;
 import ship.it.goodgolems.spi.ai.model.EmployeeSuggester;
 import ship.it.goodgolems.spi.ai.model.ProjectSuggester;
@@ -29,6 +31,9 @@ import ship.it.goodgolems.spi.vectordb.VectorStoregeService;
 @RequiredArgsConstructor
 public class SuggestionService implements AiSuggestionApi {
 
+    @Value("${spring.ai.rag:false}")
+    private boolean useRag;
+
     private final EmployeeStorage employeeStorage;
     private final ProjectStorage projectStorage;
     private final EmployeeSuggester employeeSuggester;
@@ -36,6 +41,12 @@ public class SuggestionService implements AiSuggestionApi {
 
     private final VectorStoregeService vectorStoregeService;
 
+    @Override
+    public TeamSuggestion suggestEmployees(Long projectId) {
+        var project = projectStorage.getProjectById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
+        var team = suggestEmployees(List.of(project), useRag).get(project);
+        return new TeamSuggestion(project, team);
+    }
 
     @Override
     public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects, boolean usingRAG) {
@@ -71,14 +82,6 @@ public class SuggestionService implements AiSuggestionApi {
 
     }
 
-    private List<Employee> findSuggestedEmployees(Project project, Set<Employee> employees, boolean usingRAG) {
-        if (usingRAG) {
-            return employeeSuggester.sagestEmployeesForProject(project);
-        } else {
-            return employeeSuggester.sagestEmployeesForProject(project, employees);
-        }
-    }
-
     @Override
     public Set<Project> suggestProjects(Employee employee, boolean usingRAG) {
         if (usingRAG) {
@@ -93,6 +96,14 @@ public class SuggestionService implements AiSuggestionApi {
                         log.warn("No suggested projects found");
                         return Set.of();
                     });
+        }
+    }
+
+    private List<Employee> findSuggestedEmployees(Project project, Set<Employee> employees, boolean usingRAG) {
+        if (usingRAG) {
+            return employeeSuggester.sagestEmployeesForProject(project);
+        } else {
+            return employeeSuggester.sagestEmployeesForProject(project, employees);
         }
     }
 

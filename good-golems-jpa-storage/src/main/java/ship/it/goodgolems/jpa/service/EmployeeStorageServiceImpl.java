@@ -31,7 +31,7 @@ public class EmployeeStorageServiceImpl implements EmployeeStorage  {
 
     @Override
     public Set<Employee> getAvailableEmployees() {
-        return employeeRepository.findAvailableEmployees();
+        return employeeRepository.findAll().stream().map(mapper::map).filter(Employee::isAvailable).collect(Collectors.toSet());
     }
 
     public List<EmployeeEntity> getEmployeesByTechnology(String technologyName) {

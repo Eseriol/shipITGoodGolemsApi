@@ -51,6 +51,7 @@ public class Converter {
 
     public static EmployeeDto convert(Employee employee) {
         return EmployeeDto.builder()
+                .id(employee.id())
                 .fullName(employee.fullName())
                 .position(employee.position())
                 .experience(employee.experience()
@@ -63,6 +64,7 @@ public class Converter {
 
     public static Employee convert(EmployeeDto employeeDto) {
         return Employee.builder()
+                .id(employeeDto.id())
                 .fullName(employeeDto.fullName())
                 .position(employeeDto.position())
                 .experience(employeeDto.experience()
@@ -75,6 +77,7 @@ public class Converter {
 
     public static ProjectDto convert(Project project) {
         return ProjectDto.builder()
+                .id(project.id())
                 .name(project.name())
                 .employees(project.employees()
                         .stream()
@@ -89,6 +92,7 @@ public class Converter {
 
     public static Project convert(ProjectDto projectDto) {
         return Project.builder()
+                .id(projectDto.id())
                 .name(projectDto.name())
                 .employees(projectDto.employees()
                         .stream()

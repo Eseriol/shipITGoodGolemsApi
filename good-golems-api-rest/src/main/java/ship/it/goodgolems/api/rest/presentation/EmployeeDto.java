@@ -15,6 +15,9 @@ import lombok.Builder;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record EmployeeDto(
+        @JsonProperty("id")
+        Integer id,
+
         @JsonProperty("fullname")
         String fullName,
 

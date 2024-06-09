@@ -10,6 +10,7 @@ import lombok.Builder;
 
 @Builder
 public record Employee(
+        Integer id,
         String fullName,
         String position,
         Set<Experience> experience,

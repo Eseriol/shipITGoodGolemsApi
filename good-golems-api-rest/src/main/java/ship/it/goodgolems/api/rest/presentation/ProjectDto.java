@@ -14,6 +14,8 @@ import lombok.Builder;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record ProjectDto(
+        @JsonProperty("id")
+        Long id,
         @JsonProperty("name")
         String name,
         @JsonProperty("employees")

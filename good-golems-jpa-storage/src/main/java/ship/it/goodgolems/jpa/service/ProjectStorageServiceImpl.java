@@ -1,5 +1,6 @@
 package ship.it.goodgolems.jpa.service;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,5 +27,11 @@ public class ProjectStorageServiceImpl implements ProjectStorage {
                 .stream()
                 .map(mapper::map)
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Optional<Project> getProjectById(Long name) {
+        return projectRepository.findById(name)
+                .map(mapper::map);
     }
 }

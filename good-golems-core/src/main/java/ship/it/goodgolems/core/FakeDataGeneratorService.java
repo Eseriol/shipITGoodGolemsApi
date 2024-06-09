@@ -1,15 +1,20 @@
 package ship.it.goodgolems.core;
 
-import jakarta.annotation.PostConstruct;
-import org.springframework.stereotype.Service;
-import ship.it.goodgolems.api.FakeDataGeneratorApi;
-import ship.it.goodgolems.core.providers.CustomFaker;
-import ship.it.goodgolems.domain.*;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import org.springframework.stereotype.Service;
+
+import ship.it.goodgolems.api.FakeDataGeneratorApi;
+import ship.it.goodgolems.core.providers.CustomFaker;
+import ship.it.goodgolems.domain.Employee;
+import ship.it.goodgolems.domain.Experience;
+import ship.it.goodgolems.domain.ExperiencedCount;
+import ship.it.goodgolems.domain.Project;
+import ship.it.goodgolems.domain.ProjectRequirement;
+import ship.it.goodgolems.domain.Stack;
 
 @Service
 public class FakeDataGeneratorService implements FakeDataGeneratorApi {
@@ -42,12 +47,11 @@ public class FakeDataGeneratorService implements FakeDataGeneratorApi {
                             })
                             .collect(Collectors.toSet());
 
-                    return new Employee(
-                            customFaker.name().fullName(),
-                            customFaker.provider().profession(),
-                            experiences,
-                            generateProjects(1).get(0)
-                    );
+                    return Employee.builder()
+                            .fullName(customFaker.name().fullName())
+                            .position(customFaker.provider().profession())
+                            .experience(experiences)
+                            .build();
                 })
                 .toList();
     }

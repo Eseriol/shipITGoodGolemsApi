@@ -15,9 +15,10 @@ public interface ProjectMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "employees", target = "employees")
     @Mapping(source = "requirements", target = "requirements")
-    @Mapping(target = "id", ignore = true)
+    @Mapping(source = "id", target = "id")
     ProjectEntity map(Project project);
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "employees", target = "employees")
     @Mapping(source = "requirements", target = "requirements")

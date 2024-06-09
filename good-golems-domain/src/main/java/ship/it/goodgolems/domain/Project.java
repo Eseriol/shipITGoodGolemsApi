@@ -10,6 +10,7 @@ import lombok.Builder;
 
 @Builder
 public record Project(
+        Long id,
         String name,
         Set<Employee> employees,
         Set<ProjectRequirement> requirements

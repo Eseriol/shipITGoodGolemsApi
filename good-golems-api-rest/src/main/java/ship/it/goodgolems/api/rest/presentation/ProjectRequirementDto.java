@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * ProjectRequirementDto represents the Data Transfer Object for project requirement information.
+ * It is used to transfer data between different layers of an application.
+ */
 public record ProjectRequirementDto(
         @JsonProperty("stack")
         StackDto stack,

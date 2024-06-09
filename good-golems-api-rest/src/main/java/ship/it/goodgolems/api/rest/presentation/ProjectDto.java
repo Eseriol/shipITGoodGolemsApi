@@ -11,6 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
 
+/**
+ * ProjectDto represents the Data Transfer Object for a Project.
+ * It is used to transfer data between different layers of an application.
+ */
 @Builder
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public record ProjectDto(

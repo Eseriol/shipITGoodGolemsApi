@@ -19,14 +19,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 
+/**
+ * Configuration class for configuring the models, APIs, and clients used in the application.
+ */
 @Configuration
 public class ModelConfig {
 
+    /**
+     * Creates a new instance of ChatModel using the provided Anthropic3ChatBedrockApi and Anthropic3ChatOptions.
+     *
+     * @param api     the Anthropic3ChatBedrockApi instance to be used by the ChatModel
+     * @param options the Anthropic3ChatOptions instance to configure the ChatModel
+     * @return a new instance of ChatModel
+     */
     @Bean
     public ChatModel chatModel(Anthropic3ChatBedrockApi api, Anthropic3ChatOptions options) {
         return new BedrockAnthropic3ChatModel(api, options);
     }
 
+    /**
+     * Creates an instance of Anthropic3ChatBedrockApi.
+     *
+     * @param awsRegion              the AWS region where the API will be executed
+     * @param credentialsProvider    the credentials provider for authenticating API requests
+     * @return an instance of Anthropic3ChatBedrockApi
+     */
     @Bean
     public Anthropic3ChatBedrockApi anthropic3ChatBedrockApi(Region awsRegion, EnvironmentVariableCredentialsProvider credentialsProvider) {
         return new Anthropic3ChatBedrockApi(
@@ -38,6 +55,11 @@ public class ModelConfig {
         );
     }
 
+    /**
+     * Returns a new instance of {@link Anthropic3ChatOptions} with default values.
+     *
+     * @return a new instance of {@link Anthropic3ChatOptions}
+     */
     @Bean
     public Anthropic3ChatOptions anthropicChatOptions() {
         return Anthropic3ChatOptions.builder()

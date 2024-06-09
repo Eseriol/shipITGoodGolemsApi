@@ -5,6 +5,9 @@ import org.springframework.ai.chat.prompt.PromptTemplate;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+/**
+ * The TeamPrompts class provides prompt templates for selecting the best team based on project requirements.
+ */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TeamPrompts {
 

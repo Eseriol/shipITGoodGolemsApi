@@ -4,6 +4,10 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * ExperienceDto represents the Data Transfer Object for the experience of an employee.
+ * It is used to transfer data between different layers of an application.
+ */
 public record ExperienceDto(
         @JsonProperty("stack")
         StackDto stack,

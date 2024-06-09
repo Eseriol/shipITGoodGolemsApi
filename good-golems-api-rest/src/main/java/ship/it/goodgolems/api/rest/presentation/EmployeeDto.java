@@ -12,6 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Builder;
 
+/**
+ * EmployeeDto represents the Data Transfer Object for an Employee.
+ * It is used to transfer data between different layers of an application.
+ */
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record EmployeeDto(

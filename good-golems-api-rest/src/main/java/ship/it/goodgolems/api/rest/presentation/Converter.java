@@ -2,6 +2,8 @@ package ship.it.goodgolems.api.rest.presentation;
 
 import java.util.stream.Collectors;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import ship.it.goodgolems.domain.Employee;
 import ship.it.goodgolems.domain.Experience;
 import ship.it.goodgolems.domain.ExperiencedCount;
@@ -9,6 +11,12 @@ import ship.it.goodgolems.domain.Project;
 import ship.it.goodgolems.domain.ProjectRequirement;
 import ship.it.goodgolems.domain.Stack;
 
+
+/**
+ * The Converter class provides static methods for converting between different data transfer objects (DTOs)
+ * and domain objects.
+ */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Converter {
 
     public static StackDto convert(Stack stack) {
@@ -58,7 +66,6 @@ public class Converter {
                         .stream()
                         .map(Converter::convert)
                         .collect(Collectors.toSet()))
-//                .currentProject(Converter.convert(employee.currentProject()))
                 .build();
     }
 
@@ -71,7 +78,6 @@ public class Converter {
                         .stream()
                         .map(Converter::convert)
                         .collect(Collectors.toSet()))
-//                .currentProject(Converter.convert(employeeDto.currentProject()))
                 .build();
     }
 

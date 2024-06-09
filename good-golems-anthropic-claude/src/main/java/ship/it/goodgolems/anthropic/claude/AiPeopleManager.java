@@ -24,7 +24,7 @@ public class AiPeopleManager implements EmployeeSuggester {
         var prompt = TeamPrompts.ADVISE_TEAM.render(Map.of(
                 "project", project.toString()
         ));
-        return aiFacade.getResponse(prompt, new ParameterizedTypeReference<>() {
+        return aiFacade.adviseResponse(prompt, new ParameterizedTypeReference<>() {
         });
     }
 
@@ -34,7 +34,7 @@ public class AiPeopleManager implements EmployeeSuggester {
                 "project", project.toString(),
                 "employees", employees
         ));
-        return aiFacade.adviseResponse(prompt, new ParameterizedTypeReference<>() {
+        return aiFacade.getResponse(prompt, new ParameterizedTypeReference<>() {
         });
     }
 

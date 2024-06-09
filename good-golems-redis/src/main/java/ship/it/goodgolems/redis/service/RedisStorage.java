@@ -1,5 +1,5 @@
 
-package ship.it.goodgolems.chroma.service;
+package ship.it.goodgolems.redis.service;
 
 
 import java.util.List;
@@ -15,7 +15,7 @@ import ship.it.goodgolems.spi.vectordb.VectorStoregeService;
 
 @Service
 @RequiredArgsConstructor
-public class VectorStoreServiceImpl implements VectorStoregeService {
+public class RedisStorage implements VectorStoregeService {
 
     private final VectorStore vectorStore;
 

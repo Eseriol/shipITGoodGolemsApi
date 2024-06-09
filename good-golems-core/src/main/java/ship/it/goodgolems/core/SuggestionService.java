@@ -25,6 +25,21 @@ import ship.it.goodgolems.spi.storage.EmployeeStorage;
 import ship.it.goodgolems.spi.storage.ProjectStorage;
 import ship.it.goodgolems.spi.vectordb.VectorStoregeService;
 
+/**
+ * The SuggestionService class is responsible for providing suggestions for employees to be assigned to projects.
+ * It implements the AiSuggestionApi interface.
+ *
+ * Before using this service, make sure to configure the required dependencies and properties.
+ *
+ * Usage:
+ * SuggestionService suggestionService = new SuggestionService(employeeStorage, projectStorage, employeeSuggester, vectorStoregeService);
+ *
+ * // Get team suggestion for a specific project
+ * TeamSuggestion teamSuggestion = suggestionService.suggestEmployees(projectId);
+ *
+ * // Get suggestions for multiple projects
+ * Map<Project, Set<Employee>> suggestedEmployees = suggestionService.suggestEmployees(projects, usingRAG);
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -39,6 +54,13 @@ public class SuggestionService implements AiSuggestionApi {
 
     private final VectorStoregeService vectorStoregeService;
 
+    /**
+     * Retrieves a team suggestion based on a given project ID.
+     *
+     * @param projectId the ID of the project to suggest employees for
+     * @return the suggested team for the project
+     * @throws RuntimeException if the project with the given ID is not found
+     */
     @Override
     public TeamSuggestion suggestEmployees(Long projectId) {
         var project = projectStorage.getProjectById(projectId).orElseThrow(() -> new RuntimeException("Project not found"));
@@ -46,6 +68,13 @@ public class SuggestionService implements AiSuggestionApi {
         return new TeamSuggestion(project, team);
     }
 
+    /**
+     * Suggests employees for each project based on the given collection of projects and the flag indicating whether to use RAG (Red, Amber, Green) system.
+     *
+     * @param projects   the collection of projects
+     * @param usingRAG   flag indicating whether to use RAG system
+     * @return a map containing suggested employees for each project
+     */
     @Override
     public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects, boolean usingRAG) {
 

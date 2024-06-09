@@ -16,6 +16,10 @@ import ship.it.goodgolems.domain.Project;
 import ship.it.goodgolems.domain.ProjectRequirement;
 import ship.it.goodgolems.domain.Stack;
 
+/**
+ * The FakeDataGeneratorService class is a service class that implements the FakeDataGeneratorApi interface.
+ * It provides methods for generating fake employees and projects.
+ */
 @Service
 public class FakeDataGeneratorService implements FakeDataGeneratorApi {
 
@@ -31,6 +35,12 @@ public class FakeDataGeneratorService implements FakeDataGeneratorApi {
 
 
 
+    /**
+     * Generates a list of fake employees.
+     *
+     * @param generationRequested the number of employees to generate
+     * @return the list of generated employees
+     */
     @Override
     public List<Employee> generateEmployees(int generationRequested) {
         return IntStream.range(0, generationRequested)
@@ -56,6 +66,12 @@ public class FakeDataGeneratorService implements FakeDataGeneratorApi {
                 .toList();
     }
 
+    /**
+     * Generates a list of fake projects based on the number of projects requested.
+     *
+     * @param generationRequested the number of projects to generate
+     * @return the list of generated projects
+     */
     @Override
     public List<Project> generateProjects(int generationRequested) {
         return IntStream.range(0, generationRequested)

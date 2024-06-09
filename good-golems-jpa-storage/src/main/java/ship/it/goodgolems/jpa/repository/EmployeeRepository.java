@@ -1,15 +1,21 @@
 package ship.it.goodgolems.jpa.repository;
 
-import java.util.List;
+import java.util.Set;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
 import ship.it.goodgolems.domain.Employee;
+import ship.it.goodgolems.jpa.model.EmployeeEntity;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends ListCrudRepository<EmployeeEntity, Long> {
 
-    List<Employee> findEmployeesByAvailableIs(boolean available);
+    default Set<Employee> findAvailableEmployees() {
+        return findEmployeesByCurrentProjectEmpty(
+                Employee.class
+        );
+    }
 
+    <T> Set<T> findEmployeesByCurrentProjectEmpty(Class<T> type);
 }

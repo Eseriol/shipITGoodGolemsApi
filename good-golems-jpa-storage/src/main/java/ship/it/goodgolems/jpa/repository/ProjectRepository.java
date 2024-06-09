@@ -1,9 +1,10 @@
 package ship.it.goodgolems.jpa.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
-import ship.it.goodgolems.domain.Project;
+
+import ship.it.goodgolems.jpa.model.ProjectEntity;
 
 @Repository
-public interface ProjectRepository extends CrudRepository<Project, Long> {
+public interface ProjectRepository extends ListCrudRepository<ProjectEntity, Long> {
 }

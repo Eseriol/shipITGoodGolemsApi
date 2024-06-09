@@ -1,5 +1,7 @@
 package ship.it.goodgolems.jpa.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,11 +17,11 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class StackEntity {
+public class StackEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column
     String technologyName;

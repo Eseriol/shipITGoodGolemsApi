@@ -1,5 +1,6 @@
 package ship.it.goodgolems.jpa.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -19,11 +20,11 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class EmployeeEntity {
+public class EmployeeEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @Column
     private String fullName;

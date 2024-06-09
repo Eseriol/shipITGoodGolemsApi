@@ -7,11 +7,19 @@ import org.mapstruct.ReportingPolicy;
 import ship.it.goodgolems.domain.Project;
 import ship.it.goodgolems.jpa.model.ProjectEntity;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        componentModel = "spring"
+)
 public interface ProjectMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "employees", target = "employees")
     @Mapping(source = "requirements", target = "requirements")
     @Mapping(target = "id", ignore = true)
     ProjectEntity map(Project project);
+
+    @Mapping(source = "name", target = "name")
+    @Mapping(source = "employees", target = "employees")
+    @Mapping(source = "requirements", target = "requirements")
+    Project map(ProjectEntity project);
 }

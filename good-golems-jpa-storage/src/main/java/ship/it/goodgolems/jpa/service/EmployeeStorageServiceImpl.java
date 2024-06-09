@@ -1,37 +1,34 @@
 package ship.it.goodgolems.jpa.service;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import ship.it.goodgolems.domain.Employee;
+import ship.it.goodgolems.jpa.mapper.EmployeeMapper;
 import ship.it.goodgolems.jpa.repository.EmployeeRepository;
 import ship.it.goodgolems.spi.storage.EmployeeStorage;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class EmployeeStorageServiceImpl implements EmployeeStorage  {
 
-    @Autowired
-    private  EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
+    private final EmployeeMapper mapper;
 
     @Override
     public Set<Employee> getEmployees() {
-        Iterator<Employee> iterator = employeeRepository.findAll().iterator();
-        Set<Employee> result = new HashSet<>();
-        while (iterator.hasNext()) {
-            result.add(iterator.next());
-        }
-        return result;
+        return employeeRepository.findAll().stream()
+                .map(mapper::map)
+                .collect(Collectors.toSet());
     }
 
     @Override
     public Set<Employee> getAvailableEmployees() {
-
-        return new HashSet<>(employeeRepository.findEmployeesByAvailableIs(true));
+        return employeeRepository.findAvailableEmployees();
     }
 }

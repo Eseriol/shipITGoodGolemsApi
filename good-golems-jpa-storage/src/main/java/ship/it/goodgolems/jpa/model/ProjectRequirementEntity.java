@@ -1,5 +1,6 @@
 package ship.it.goodgolems.jpa.model;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -18,11 +19,11 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class ProjectRequirementEntity {
+public class ProjectRequirementEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @OneToOne
     StackEntity stack;

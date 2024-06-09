@@ -2,9 +2,12 @@ package ship.it.goodgolems.core;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Service;
@@ -49,7 +52,9 @@ public class SuggestionService implements AiSuggestionApi {
                 storedEmployees = vectorStoregeService.store(employees);
             }
             try {
-                Set<Employee> suggested = findSuggestedEmployees(project, employees, usingRAG);
+                Set<Employee> suggested = new HashSet<>(
+                        Optional.ofNullable(findSuggestedEmployees(project, employees, usingRAG))
+                                .orElseGet(Collections::emptyList));
                 suggestedEmployees.put(project, suggested);
                 employees.removeAll(suggested);
             } catch (Exception e){
@@ -66,19 +71,11 @@ public class SuggestionService implements AiSuggestionApi {
 
     }
 
-    private Set<Employee> findSuggestedEmployees(Project project, Set<Employee> employees, boolean usingRAG) {
+    private List<Employee> findSuggestedEmployees(Project project, Set<Employee> employees, boolean usingRAG) {
         if (usingRAG) {
-            return employeeSuggester.sagestEmployeesForProject(project)
-                    .orElseGet(() -> {
-                        log.warn("No suggested employees found for project: {}", project.name());
-                        return Set.of();
-                    });
+            return employeeSuggester.sagestEmployeesForProject(project);
         } else {
-            return employeeSuggester.sagestEmployeesForProject(project, employees)
-                    .orElseGet(() -> {
-                        log.warn("No suggested employees found for project: {}", project.name());
-                        return Set.of();
-                    });
+            return employeeSuggester.sagestEmployeesForProject(project, employees);
         }
     }
 

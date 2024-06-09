@@ -68,6 +68,11 @@ public class SuggestionService implements AiSuggestionApi {
         return new TeamSuggestion(project, team);
     }
 
+    @Override
+    public String explainSuggestion(Project project, Collection<Employee> teamMembers) {
+        return employeeSuggester.explainSuggestion(project, teamMembers);
+    }
+
     /**
      * Suggests employees for each project based on the given collection of projects and the flag indicating whether to use RAG (Red, Amber, Green) system.
      *

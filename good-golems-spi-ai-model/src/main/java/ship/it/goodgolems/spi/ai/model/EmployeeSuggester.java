@@ -11,6 +11,8 @@ import ship.it.goodgolems.domain.Project;
  */
 public interface EmployeeSuggester {
 
+    String explainSuggestion(Project project, Collection<Employee> teamMembers);
+
     List<Employee> sagestEmployeesForProject(final Project project);
 
     List<Employee> sagestEmployeesForProject(final Project project, final Collection<Employee> employees);

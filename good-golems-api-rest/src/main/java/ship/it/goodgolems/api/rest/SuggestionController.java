@@ -34,9 +34,10 @@ public class SuggestionController {
     public ResponseEntity<TeamSuggestionDto> getResponse(@PathVariable Long projectId) {
         var dtoBuilder = TeamSuggestionDto.builder();
         var suggestion = suggestionApi.suggestEmployees(projectId);
+        var comment = suggestionApi.explainSuggestion(suggestion.project(), suggestion.team());
         dtoBuilder.projectName(suggestion.project()
                         .name())
-                .explanation("Here is a suggested team for the project")
+                .explanation(comment)
                 .project(Converter.convert(suggestion.project()))
                 .team(suggestion.team()
                         .stream()

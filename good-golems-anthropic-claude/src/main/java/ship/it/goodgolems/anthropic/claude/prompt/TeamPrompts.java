@@ -27,4 +27,10 @@ public class TeamPrompts {
             The project requirement: {project}
             List of employees: {employees}
             """);
+
+    public static final PromptTemplate EXPLAIN_SUGGESTION = new PromptTemplate("""
+            Based on the list of employees and the project requirements explain why these teammates are the best for this project.
+            The project requirement: {project}
+            List of employees: {employees}
+            """);
 }

@@ -30,4 +30,13 @@ public interface AiSuggestionApi {
      */
     TeamSuggestion suggestEmployees(Long projectId);
 
+    /**
+     * This method provides an explanation or suggestion for a given project and collection of team members.
+     *
+     * @param project The project for which the suggestion is provided.
+     * @param teamMembers The collection of team members working on the project.
+     * @return The explanation or suggestion for the project.
+     */
+    String explainSuggestion(Project project, Collection<Employee> teamMembers);
+
 }

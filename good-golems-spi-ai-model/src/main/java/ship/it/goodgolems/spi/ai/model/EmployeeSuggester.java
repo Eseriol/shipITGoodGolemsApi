@@ -1,7 +1,6 @@
 package ship.it.goodgolems.spi.ai.model;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -12,10 +11,6 @@ public interface EmployeeSuggester {
 
     Optional<Set<Employee>> sagestEmployeesForProject(final Project project);
 
-    Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(final Collection<Project> projects);
-
     Optional<Set<Employee>> sagestEmployeesForProject(final Project project, final Collection<Employee> employees);
-
-    Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(final Collection<Project> projects, final Collection<Employee> employees);
 
 }

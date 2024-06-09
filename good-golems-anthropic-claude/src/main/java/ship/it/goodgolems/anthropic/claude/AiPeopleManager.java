@@ -1,7 +1,6 @@
 package ship.it.goodgolems.anthropic.claude;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -13,13 +12,9 @@ import ship.it.goodgolems.spi.ai.model.EmployeeSuggester;
 
 @Component
 public class AiPeopleManager implements EmployeeSuggester {
-    @Override
-    public Optional<Set<Employee>> sagestEmployeesForProject(Project project) {
-        return Optional.empty();
-    }
 
     @Override
-    public Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(Collection<Project> projects) {
+    public Optional<Set<Employee>> sagestEmployeesForProject(Project project) {
         return Optional.empty();
     }
 
@@ -28,9 +23,4 @@ public class AiPeopleManager implements EmployeeSuggester {
         return Optional.empty();
     }
 
-    @Override
-    public Optional<Map<Project, Set<Employee>>> sagestEmployeesForProjects(Collection<Project> projects,
-            Collection<Employee> employees) {
-        return Optional.empty();
-    }
 }

@@ -1,7 +1,7 @@
 package ship.it.goodgolems.core;
 
 import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,26 +32,39 @@ public class SuggestionService implements AiSuggestionApi {
     private final VectorStoregeService vectorStoregeService;
 
 
-
     @Override
     public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects) {
 
-        Set<Employee> employees = employeeStorage
-                .getAvailableEmployees();
+        Set<Employee> employees = employeeStorage.getAvailableEmployees();
         if (employees.isEmpty()) {
             log.warn("No available employees found");
             return Map.of();
         }
-        List<VectorStoreDocument> storedEmployees = vectorStoregeService.store(employees);
-        try {
-            return employeeSuggester.sagestEmployeesForProjects(projects).orElseGet(
-                    () -> {
-                        log.warn("No suggested employees found");
-                        return Map.of();
-                    });
-        } finally {
-            vectorStoregeService.delete(storedEmployees.stream().map(VectorStoreDocument::id).toList());
+        Map<Project, Set<Employee>> suggestedEmployees = new HashMap<>();
+        for (Project project : projects) {
+            var storedEmployees = vectorStoregeService.store(employees);
+            try {
+                Set<Employee> suggested = findSuggestedEmployees(project, employees);
+                suggestedEmployees.put(project, suggested);
+                employees.removeAll(suggested);
+            } catch (Exception e){
+                log.error(e.getMessage(), e);
+            }finally {
+                vectorStoregeService.delete(storedEmployees.stream()
+                        .map(VectorStoreDocument::id)
+                        .toList());
+            }
         }
+        return suggestedEmployees;
+
+    }
+
+    private Set<Employee> findSuggestedEmployees(Project project, Set<Employee> employees) {
+        return employeeSuggester.sagestEmployeesForProject(project, employees)
+                .orElseGet(() -> {
+                    log.warn("No suggested employees found for project: {}", project.name());
+                    return Set.of();
+                });
     }
 
     @Override

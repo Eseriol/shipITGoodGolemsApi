@@ -8,6 +8,9 @@ import org.springframework.util.Assert;
 
 import lombok.Builder;
 
+/**
+ * The Employee class represents an employee in a company.
+ */
 @Builder
 public record Employee(
         Integer id,

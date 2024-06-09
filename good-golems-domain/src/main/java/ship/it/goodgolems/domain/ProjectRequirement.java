@@ -4,6 +4,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * The ProjectRequirement class represents the requirements of a project.
+ * It includes information about the required technology stack and the number of employees with specific years of experience in the stack.
+ */
 public record ProjectRequirement(
         Stack stack,
         Set<ExperiencedCount> experiencedCount

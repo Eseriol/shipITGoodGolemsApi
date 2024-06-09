@@ -8,6 +8,10 @@ import org.springframework.util.Assert;
 
 import lombok.Builder;
 
+/**
+ * The Project class represents a project in a company.
+ * It contains information about the project's ID, name, employees, and requirements.
+ */
 @Builder
 public record Project(
         Long id,

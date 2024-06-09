@@ -1,11 +1,11 @@
 package ship.it.goodgolems.domain;
 
-import org.springframework.util.Assert;
-
+/**
+ * The Stack class represents a technology stack.
+ * It includes the name of the technology.
+ */
 public record Stack(
         String technologyName
 ) {
-    public Stack {
-//        Assert.hasText(technologyName, "Name of technology must not be empty");
-    }
+
 }

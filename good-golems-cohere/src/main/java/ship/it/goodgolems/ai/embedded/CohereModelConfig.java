@@ -11,9 +11,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 
+/**
+ * Configuration class for setting up the Cohere model.
+ */
 @Configuration
 public class CohereModelConfig {
 
+    /**
+     * Returns an instance of the EmbeddingModel using the specified AWS region and credentials provider.
+     *
+     * @param awsRegion the AWS region where the embedding model is hosted
+     * @param credentialsProvider the credentials provider for authentication
+     * @return an instance of the EmbeddingModel
+     */
     @Bean
     public EmbeddingModel embeddingModel(Region awsRegion, EnvironmentVariableCredentialsProvider credentialsProvider) {
         var cohereEmbeddingApi =new CohereEmbeddingBedrockApi(

@@ -26,9 +26,10 @@ public class EmployeeEntity implements Serializable {
     @Column
     private String position;
 
-    @OneToMany(cascade =  CascadeType.ALL)
+    @OneToMany(cascade =  CascadeType.ALL, orphanRemoval = true)
     private Set<ExperienceEntity> experience;
 
-    @ManyToOne(cascade =  CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "project_id")
     private ProjectEntity currentProject;
 }

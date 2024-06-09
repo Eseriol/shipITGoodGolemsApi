@@ -23,9 +23,9 @@ public class ProjectEntity implements Serializable {
     @Column
     String name;
 
-    @OneToMany
-    Set<EmployeeEntity> employees;
+    @OneToMany(mappedBy = "currentProject")
+    private Set<EmployeeEntity> employees;
 
-    @OneToMany(cascade =  CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     Set<ProjectRequirementEntity> requirements;
 }

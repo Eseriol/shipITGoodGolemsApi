@@ -20,9 +20,10 @@ public class ProjectRequirementEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(cascade =  CascadeType.ALL)
-    StackEntity stack;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stack_id")
+    private StackEntity stack;
 
-    @OneToMany(cascade =  CascadeType.ALL)
-    Set<ExperiencedCountEntity> experiencedCount;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<ExperiencedCountEntity> experiencedCount;
 }

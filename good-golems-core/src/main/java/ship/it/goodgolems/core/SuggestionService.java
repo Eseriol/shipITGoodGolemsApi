@@ -1,7 +1,9 @@
 package ship.it.goodgolems.core;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -33,7 +35,7 @@ public class SuggestionService implements AiSuggestionApi {
 
 
     @Override
-    public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects) {
+    public Map<Project, Set<Employee>> suggestEmployees(Collection<Project> projects, boolean usingRAG) {
 
         Set<Employee> employees = employeeStorage.getAvailableEmployees();
         if (employees.isEmpty()) {
@@ -42,38 +44,59 @@ public class SuggestionService implements AiSuggestionApi {
         }
         Map<Project, Set<Employee>> suggestedEmployees = new HashMap<>();
         for (Project project : projects) {
-            var storedEmployees = vectorStoregeService.store(employees);
+            List<VectorStoreDocument> storedEmployees = new ArrayList<>();
+            if (usingRAG) {
+                storedEmployees = vectorStoregeService.store(employees);
+            }
             try {
-                Set<Employee> suggested = findSuggestedEmployees(project, employees);
+                Set<Employee> suggested = findSuggestedEmployees(project, employees, usingRAG);
                 suggestedEmployees.put(project, suggested);
                 employees.removeAll(suggested);
             } catch (Exception e){
                 log.error(e.getMessage(), e);
-            }finally {
-                vectorStoregeService.delete(storedEmployees.stream()
-                        .map(VectorStoreDocument::id)
-                        .toList());
+            } finally {
+                if (usingRAG) {
+                    vectorStoregeService.delete(storedEmployees.stream()
+                            .map(VectorStoreDocument::id)
+                            .toList());
+                }
             }
         }
         return suggestedEmployees;
 
     }
 
-    private Set<Employee> findSuggestedEmployees(Project project, Set<Employee> employees) {
-        return employeeSuggester.sagestEmployeesForProject(project, employees)
-                .orElseGet(() -> {
-                    log.warn("No suggested employees found for project: {}", project.name());
-                    return Set.of();
-                });
+    private Set<Employee> findSuggestedEmployees(Project project, Set<Employee> employees, boolean usingRAG) {
+        if (usingRAG) {
+            return employeeSuggester.sagestEmployeesForProject(project)
+                    .orElseGet(() -> {
+                        log.warn("No suggested employees found for project: {}", project.name());
+                        return Set.of();
+                    });
+        } else {
+            return employeeSuggester.sagestEmployeesForProject(project, employees)
+                    .orElseGet(() -> {
+                        log.warn("No suggested employees found for project: {}", project.name());
+                        return Set.of();
+                    });
+        }
     }
 
     @Override
-    public Set<Project> suggestProjects(Employee employee) {
-        return projectSuggester.findProjectsForEmployee(employee, projectStorage.getProjects())
-                .orElseGet(() -> {
-                    log.warn("No suggested projects found");
-                    return Set.of();
-                });
+    public Set<Project> suggestProjects(Employee employee, boolean usingRAG) {
+        if (usingRAG) {
+            return projectSuggester.findProjectsForEmployee(employee)
+                    .orElseGet(() -> {
+                        log.warn("No suggested projects found");
+                        return Set.of();
+                    });
+        } else {
+            return projectSuggester.findProjectsForEmployee(employee, projectStorage.getProjects())
+                    .orElseGet(() -> {
+                        log.warn("No suggested projects found");
+                        return Set.of();
+                    });
+        }
     }
 
 }

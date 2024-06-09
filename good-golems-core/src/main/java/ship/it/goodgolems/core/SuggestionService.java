@@ -21,7 +21,6 @@ import ship.it.goodgolems.domain.Project;
 import ship.it.goodgolems.domain.ai.TeamSuggestion;
 import ship.it.goodgolems.domain.ai.VectorStoreDocument;
 import ship.it.goodgolems.spi.ai.model.EmployeeSuggester;
-import ship.it.goodgolems.spi.ai.model.ProjectSuggester;
 import ship.it.goodgolems.spi.storage.EmployeeStorage;
 import ship.it.goodgolems.spi.storage.ProjectStorage;
 import ship.it.goodgolems.spi.vectordb.VectorStoregeService;
@@ -37,7 +36,6 @@ public class SuggestionService implements AiSuggestionApi {
     private final EmployeeStorage employeeStorage;
     private final ProjectStorage projectStorage;
     private final EmployeeSuggester employeeSuggester;
-    private final ProjectSuggester projectSuggester;
 
     private final VectorStoregeService vectorStoregeService;
 
@@ -80,23 +78,6 @@ public class SuggestionService implements AiSuggestionApi {
         }
         return suggestedEmployees;
 
-    }
-
-    @Override
-    public Set<Project> suggestProjects(Employee employee, boolean usingRAG) {
-        if (usingRAG) {
-            return projectSuggester.findProjectsForEmployee(employee)
-                    .orElseGet(() -> {
-                        log.warn("No suggested projects found");
-                        return Set.of();
-                    });
-        } else {
-            return projectSuggester.findProjectsForEmployee(employee, projectStorage.getProjects())
-                    .orElseGet(() -> {
-                        log.warn("No suggested projects found");
-                        return Set.of();
-                    });
-        }
     }
 
     private List<Employee> findSuggestedEmployees(Project project, Set<Employee> employees, boolean usingRAG) {

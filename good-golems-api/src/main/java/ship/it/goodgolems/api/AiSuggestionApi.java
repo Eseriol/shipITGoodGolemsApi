@@ -14,6 +14,4 @@ public interface AiSuggestionApi {
 
     TeamSuggestion suggestEmployees(Long projectId);
 
-    Set<Project> suggestProjects(final Employee employee, boolean usingRAG);
-
 }

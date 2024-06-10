@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>GoodGolem</title>
+    <link th:href="@{/styles/main.css}" rel="stylesheet"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #1e1e2d;
+            color: #cdd6f4;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            padding: 20px;
+        }
+
+        .content {
+            flex: 1;
+            margin-bottom: auto; /* Push content to the top */
+        }
+
+        .chat-container {
+            max-height: 700px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-top: auto; /* Push chat container to the bottom */
+        }
+
+        .typing-container {
+            background-color: #2e2e3e;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            margin-bottom: 20px; /* Add margin to separate from chat container */
+        }
+
+        .typing-textarea {
+            display: flex;
+            align-items: center;
+        }
+
+        #chat-input {
+            flex: 1;
+            border-radius: 5px;
+            padding: 8px;
+            margin-right: 10px;
+            background-color: #3e3e56;
+            border: 1px solid #3e3e56;
+            color: #cdd6f4;
+            resize: none; /* Prevent manual resizing */
+            overflow: hidden;
+        }
+
+        #send-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .typing-controls {
+            display: inline-block;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+
+        .typing-controls > div {
+            display: inline-block;
+            margin-bottom: 10px;
+            margin-right: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #555;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #007bff;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #007bff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        #status {
+            margin-left: 10px;
+            color: #cdd6f4;
+        }
+
+        #loader {
+            display: none;
+            margin-top: 10px;
+            color: #cdd6f4;
+        }
+
+        .material-symbols-rounded {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+        .logo{
+            width: 300px;
+            height: auto;
+        }
+
+    </style>
+</head>
+<!--<body>-->
+<body>
+
+<div class="container">
+    <img th:src="@{/images/logo.png}" alt="Good Golem Logo" class="logo">
+
+    <!-- Chats container -->
+    <div class="chat-container"></div>
+
+    <div id="loader">Loading...</div>
+
+    <!-- Typing container -->
+    <div class="typing-container">
+        <div class="typing-content">
+            <div class="typing-textarea">
+                <textarea name="prompt" id="chat-input" spellcheck="false" placeholder="Enter a prompt here"
+                          required></textarea>
+                <button onclick="sendChat()" type="submit" id="send-btn" class="material-symbols-rounded">
+                    arrow_forward
+                </button>
+            </div>
+
+            <div class="typing-controls">
+                <div>
+                    <label class="switch">
+                        <input type="checkbox" id="toggleSwitch">
+                        <span class="slider round"></span>
+                    </label>
+                    <p id="status">Mode: AI Chat</p>
+                </div>
+                <div id="formatter" style="visibility: hidden">
+                    <label class="switch">
+                        <input type="checkbox" id="toggleSwitchFormat">
+                        <span class="slider round"></span>
+                    </label>
+                    <p id="format">Suggestion Formatter: OFF</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+    const toggleSwitch = document.getElementById('toggleSwitch');
+    const formatter = document.getElementById('formatter');
+    const statusText = document.getElementById('status');
+    const sendButton = document.getElementById('send-btn');
+    const chatInput = document.getElementById('chat-input');
+    const chatContainer = document.querySelector('.chat-container');
+    const loader = document.getElementById('loader');
+
+    toggleSwitch.addEventListener('change', () => {
+        if (toggleSwitch.checked) {
+            statusText.textContent = 'Mode: AI Rag Suggestion';
+            chatInput.placeholder = "Enter a project id to pickup a team here";
+            formatter.style.visibility = 'visible';
+        } else {
+            statusText.textContent = 'Mode: AI Chat';
+            chatInput.placeholder = "Enter a prompt here";
+            formatter.style.visibility = 'hidden';
+        }
+    });
+
+    toggleSwitchFormat.addEventListener('change', () => {
+        if (toggleSwitchFormat.checked) {
+            format.textContent = 'Suggestion Formatter: ON';
+        } else {
+            format.textContent = 'Suggestion Formatter: OFF';
+        }
+    });
+
+    chatInput.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    function sendChat() {
+        const chatMessage = chatInput.value.trim();
+        let url;
+
+        if (!toggleSwitch.checked) {
+            // Toggle is OFF: Use POST endpoint
+            url = 'http://localhost:8080/api/v1/chat/test';
+        } else {
+            // Toggle is ON: Use GET endpoint with project ID from textarea
+            const projectId = chatMessage.trim();
+            if (!projectId) {
+                // If project ID is not provided, show error message and return
+                alert('Please enter a project ID.');
+                return;
+            }
+            url = `http://localhost:8080/api/v1/suggest/team-for-project/${projectId}`;
+        }
+
+        // Disable the input and button
+        chatInput.disabled = true;
+        sendButton.disabled = true;
+        loader.style.display = 'block'; // Show loader
+
+        // Append the user's message to the chat container
+        updateChatContainer(`User: ${chatMessage}`);
+
+        // Send the AJAX request
+        $.ajax({
+            url: url,
+            type: toggleSwitch.checked ? 'GET' : 'POST',
+            contentType: 'application/json',
+            dataType: toggleSwitchFormat.checked ? 'json': 'text',
+            data: toggleSwitch.checked ? null : JSON.stringify({ message: chatMessage }),
+            success: function (response) {
+                console.log('Message sent successfully:', response);
+
+                // Format the response data
+                const formattedResponse = toggleSwitchFormat.checked ? formatResponse(response): response;
+                // Append the formatted response message to the chat container
+                updateChatContainer(`Response: ${formattedResponse}`,true);
+
+                // Enable the input and button
+                chatInput.disabled = false;
+                sendButton.disabled = false;
+                loader.style.display = 'none'; // Hide loader
+                chatInput.value = '';
+                chatInput.focus();
+            },
+            error: function (error) {
+                console.error('Error sending message:', error);
+                updateChatContainer('Error: Failed to send message',false);
+
+                // Enable the input and button
+                chatInput.disabled = false;
+                sendButton.disabled = false;
+                loader.style.display = 'none'; // Hide loader
+            }
+        });
+    }
+
+     function updateChatContainer(message,flag) {
+     if(flag){
+        chatContainer.innerHTML += `<div style="padding: 10px;background-color: #1e1e2d;">${message}</div>`;
+     }else{
+        chatContainer.innerHTML += `<div style="padding: 10px;background-color: #3d3d5b;">${message}</div>`;
+     }
+
+        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
+    }
+
+     function formatResponse(response) {
+        let formatted = `<strong>Project Name:</strong> ${response.projectName}<br>`;
+        formatted += `<strong>Explanation:</strong> ${response.explanation.replace(/\n/g, '<br>')}<br>`;
+        formatted += `<strong>Project Requirements:</strong><br>`;
+
+        response.project.requirements.forEach(requirement => {
+            formatted += `Technology: ${requirement.stack.technologyName}<br>`;
+            requirement.experiencedCount.forEach(exp => {
+                formatted += `- ${exp.countOfEmployee} employee(s) with ${exp.yearsOfExperience} year(s) of experience<br>`;
+            });
+        });
+
+        formatted += `<strong>Team:</strong><br>`;
+        response.team.forEach(member => {
+            formatted += `Name: ${member.fullname}, Position: ${member.position}<br>`;
+            member.experience.forEach(exp => {
+                formatted += `- ${exp.stack.technologyName}: ${exp.years} year(s) of experience<br>`;
+            });
+        });
+
+        return formatted;
+    }
+
+</script>
+
+</body>
+</html>

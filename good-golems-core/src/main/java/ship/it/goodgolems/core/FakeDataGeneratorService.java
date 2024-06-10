@@ -25,10 +25,10 @@ public class FakeDataGeneratorService implements FakeDataGeneratorApi {
 
     private final CustomFaker customFaker = new CustomFaker();
 
-    private static final int MAX_EMPLOYEE_STACK_NUMBER = 10;
+    private static final int MAX_EMPLOYEE_STACK_NUMBER = 6;
     private static final int MAX_EMPLOYEE_EXPERIENCE_PER_STACK = 15;
 
-    private static final int MAX_PROJECT_REQUIREMENTS_NUMBER = 10;
+    private static final int MAX_PROJECT_REQUIREMENTS_NUMBER = 6;
     private static final int MAX_PROJECT_REQUIRED_EXPERIENCE_PER_STACK = 5;
     private static final int MAX_PROJECT_REQUIRED_EMPLOYEE_PER_STACK = 5;
     private static final int MAX_PROJECT_REQUIRED_STACK_PER_SENIORITY = 5;

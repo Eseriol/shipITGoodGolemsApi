@@ -9,26 +9,37 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>good-golems-spi-storage</artifactId>
-    <description>Interfaces of storage database</description>
+    <artifactId>good-golems-ui-thymeleaf</artifactId>
+    <description>Implementation of user interface</description>
 
     <dependencies>
         <dependency>
-            <groupId>ship.it</groupId>
-            <artifactId>good-golems-domain</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>3.2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <skip>true</skip>
+                    <mainClass>ship.it.goodgolems.service.GoodGolemsApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
 </project>

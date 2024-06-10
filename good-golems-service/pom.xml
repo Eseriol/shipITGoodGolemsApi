@@ -61,6 +61,10 @@
             <groupId>ship.it</groupId>
             <artifactId>good-golems-cohere</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ship.it</groupId>
+            <artifactId>good-golems-ui-thymeleaf</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

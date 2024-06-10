@@ -28,6 +28,7 @@
 		<module>good-golems-domain</module>
         <module>good-golems-spi-storage</module>
 		<module>good-golems-jpa-storage</module>
+		<module>good-golems-ui-thymeleaf</module>
 	</modules>
 	<properties>
 		<revision.version>${project.version}</revision.version>
@@ -156,6 +157,11 @@
 				<groupId>org.springdoc</groupId>
 				<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 				<version>${springdoc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ship.it</groupId>
+				<artifactId>good-golems-ui-thymeleaf</artifactId>
+				<version>${revision.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

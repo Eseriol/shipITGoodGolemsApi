@@ -294,7 +294,7 @@
                 // Format the response data
                 const formattedResponse = toggleSwitchFormat.checked ? formatResponse(response): response;
                 // Append the formatted response message to the chat container
-                updateChatContainer(`Response: ${formattedResponse}`,true);
+                updateChatContainer(`Ai: ${formattedResponse}`,true);
 
                 // Enable the input and button
                 chatInput.disabled = false;
